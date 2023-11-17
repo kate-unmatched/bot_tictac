@@ -1,22 +1,25 @@
 package ru.bot_hak.bot_tictac.bot.negamax;
 
+
+import java.util.*;
+
+import lombok.Data;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.springframework.stereotype.Component;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashSet;
-import java.util.List;
 
 /**
  * Negamax player, with alpha-beta pruning and further optimisations
  */
-public class NegamaxPlayer {
+@Data
+@Component
+public class NegamaxPlayer{
 
     private static final Logger LOGGER =
             LogManager.getLogger(NegamaxPlayer.class.getName());
 
-    private long timeNanos;
+    private final long timeNanos=950000000;
     private long startTime;
 
     private int totalNodeCount;
@@ -24,8 +27,8 @@ public class NegamaxPlayer {
     private int branchesExploredSum;
 
     private State state;
-    private int size;
-    private List<Move> moves;
+    private final int size = 19;
+    private List<Move> moves = new ArrayList<>();
 
     /**
      * Determines if we need to respond to any threats on the board, if so,
@@ -210,8 +213,6 @@ public class NegamaxPlayer {
         }
 
         scoredMoves.sort((move1, move2) -> move2.score - move1.score);
-        printSearchInfo(scoredMoves.get(0).move, scoredMoves.get(0).score,
-                depth);
 
         moves.clear();
         for(ScoredMove move : scoredMoves) moves.add(move.move);
@@ -256,29 +257,13 @@ public class NegamaxPlayer {
                     String.format("%.2f", avgBranches));
         }
     }
-    
-    /**
-     * Print the result of a search. Includes the best move found, depth
-     * searched, and the evaluation score.
-     */
-    private void printSearchInfo(Move bestMove, int score, int depth) {
-        String moveAlgebraic = bestMove.toString();
-        LOGGER.info("Depth: {}, Evaluation: {}, Best move: {}", depth, score,
-                moveAlgebraic);
-    }
 
-    public void setupGame(int boardSize, long moveTimeMillis) {
-        this.size = boardSize;
-        this.timeNanos = (moveTimeMillis) * 1000000;
-        this.moves = new ArrayList<>();
-    }
-
-    public Move loadBoard(List<Move> orderedMoves) {
-        this.moves = orderedMoves;
-        Move bestMove = getBestMove();
-        moves.add(bestMove);
-        return bestMove;
-    }
+//    public Move loadBoard(List<Move> orderedMoves) {
+//        this.moves = orderedMoves;
+//        Move bestMove = getBestMove();
+//        moves.add(bestMove);
+//        return bestMove;
+//    }
 
     public Move getMove(Move opponentsMove) {
         moves.add(opponentsMove);
@@ -306,7 +291,7 @@ public class NegamaxPlayer {
     }
 
     public Move beginGame() {
-        Move move = new Move(size / 2, size / 2);
+        Move move = new Move(10, 10);
         moves.add(move);
         return move;
     }

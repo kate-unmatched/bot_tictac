@@ -2,7 +2,7 @@ server:
   port: 8082
 
 config:
-  session-uuid: ${SESSION_ID:b2b5e540-c062-40a6-bc17-78309da3379a}
+  session-uuid: ${SESSION_ID:62171b26-635c-4e5e-95f8-d6564d6b4579}
   bot-url: ${BOT_URL:http://localhost:8082}
   bot-id: ${BOT_ID:tt}
   bot-password: ${BOT_PASSWORD:tt}
