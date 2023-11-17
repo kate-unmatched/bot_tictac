@@ -2,9 +2,6 @@ server:
   port: 8082
 
 config:
-  session-uuid: ${SESSION_ID:62171b26-635c-4e5e-95f8-d6564d6b4579}
+  session-uuid: e09fd114-2768-469d-84a6-1abaac6e4d5a
   bot-url: ${BOT_URL:http://localhost:8082}
-  bot-id: ${BOT_ID:tt}
-  bot-password: ${BOT_PASSWORD:tt}
   mediator-address: ${MEDIATOR_URL:http://localhost:8080}
-  game-field-size: 19

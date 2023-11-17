@@ -18,7 +18,10 @@ public class BotService {
 
     private final Figure figure;
     private final NegamaxPlayer negamaxPlayer;
-    private String ourLastMoveStr=null;
+    private String ourLastMoveStr = "________________________________________________________________________________" +
+            "_______________________________________________________________________________________________________" +
+            "________________________________________________________________________________________________________" +
+            "__________________________________________________________________________";
     private final Set<Integer> busy = new HashSet<>();
 
     @Autowired
@@ -39,17 +42,18 @@ public class BotService {
         }
         return null;
     }
-    public String moveToStr(Move ourMove, String moveOpponent){
-        int index = ourMove.getRow()*19+ourMove.getCol();
-        return new StringBuilder(moveOpponent).replace(index, index, figure.getName()).toString();
+
+    public String moveToStr(Move ourMove, String moveOpponent) {
+        int index = ourMove.getRow() * 19 + ourMove.getCol();
+        return new StringBuilder(moveOpponent).replace(index, index + 1, figure.getName()).toString();
     }
 
     public String processingBot(String moveOpponent) {
-        if (!(Objects.isNull(ourLastMoveStr) && figure.ordinal()==0)) {
-            Move moveOp = strToMove(moveOpponent);
-            ourLastMoveStr=moveToStr(negamaxPlayer.getMove(moveOp), moveOpponent);
+        Move moveOp = strToMove(moveOpponent);
+        if (!Objects.isNull(moveOp)) {
+            ourLastMoveStr = moveToStr(negamaxPlayer.getMove(moveOp), moveOpponent);
         } else {
-            ourLastMoveStr=moveToStr(negamaxPlayer.beginGame(), moveOpponent);
+            ourLastMoveStr = moveToStr(negamaxPlayer.beginGame(), moveOpponent);
         }
         return ourLastMoveStr;
     }

@@ -36,9 +36,8 @@ public class BotRegistrationServiceImpl implements BotRegistrationService {
     @PostConstruct
     public void init() {
         String botUrl = botConfig.botUrl();
-        String botId = botConfig.botId();
         UUID sessionUUID = botConfig.sessionUUID();
-        log.info("Попытка зарегистрировать бота {} с url {} в сессии {}", botId, botUrl, sessionUUID);
+        log.info("Попытка зарегистрировать бота it_ri_ppers с url {} в сессии {}", botUrl, sessionUUID);
         log.debug("Отправляем запрос для регистрации бота в сессии");
         final var uri = UriComponentsBuilder
             .fromUriString("{basePath}/sessions/{sessionId}/registration")
@@ -50,8 +49,8 @@ public class BotRegistrationServiceImpl implements BotRegistrationService {
             .toUri();
         final var body = RegistrationRequest.builder()
             .botUrl(botUrl)
-            .botId(botId)
-            .password(botConfig.botPassword())
+            .botId("it_ri_ppers")
+            .password("ffN@a'Vx")
             .build();
         ResponseEntity<RegistrationResponse> response = restTemplate.exchange(
             uri,

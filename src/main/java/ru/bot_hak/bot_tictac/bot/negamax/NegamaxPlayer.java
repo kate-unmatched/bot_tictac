@@ -16,9 +16,6 @@ import org.springframework.stereotype.Component;
 @Component
 public class NegamaxPlayer{
 
-    private static final Logger LOGGER =
-            LogManager.getLogger(NegamaxPlayer.class.getName());
-
     private final long timeNanos=950000000;
     private long startTime;
 
@@ -250,11 +247,6 @@ public class NegamaxPlayer{
             double nodesPerMs = totalNodeCount / (duration > 0 ? duration : 1);
             double avgBranches = (double) branchesExploredSum / (double)
                     nonLeafCount;
-            LOGGER.info("Time: {}ms", duration);
-            LOGGER.info( "Nodes: {}", totalNodeCount);
-            LOGGER.info("Nodes/ms: {}", nodesPerMs);
-            LOGGER.info("Branches explored (avg): {} ",
-                    String.format("%.2f", avgBranches));
         }
     }
 
